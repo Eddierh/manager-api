@@ -4,13 +4,15 @@
   "outputDirectory": "dist",
   "functions": {
     "api/index.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs18.x",
+      "memory": 1024,
+      "maxDuration": 10
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "dist/vercel.handler"
+      "dest": "/api/index.js"
     }
   ]
 }
