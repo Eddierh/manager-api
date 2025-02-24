@@ -1,8 +1,9 @@
-const { bootstrap } = require('../dist/main.js');
+const path = require('path');
+const { bootstrap } = require(path.resolve(__dirname, '../dist/main.js'));
 
-let server: any;
+let server;
 
-module.exports = async function handler(event: any, context: any, callback: any) {
+module.exports = async function handler(event, context, callback) {
   if (!server) {
     server = await bootstrap();
   }
