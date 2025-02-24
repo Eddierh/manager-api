@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { WelcomeController } from './welcome.controller'; // ✅ Importar el nuevo controlador
 
 @Module({
   imports: [
@@ -14,5 +15,6 @@ import { ConfigModule } from '@nestjs/config';
     }),
     AuthModule,
   ],
+  controllers: [WelcomeController], // ✅ Registrar el controlador
 })
 export class AppModule {}
