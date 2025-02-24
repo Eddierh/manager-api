@@ -1,19 +1,6 @@
-const { createServer, proxy } = require('aws-serverless-express');
-const { AppModule } = require('../dist/main');
-const { NestFactory } = require('@nestjs/core');
+import { bootstrap } from '../src/main';
 
-let cachedServer;
-
-async function bootstrapServer() {
-  const app = await NestFactory.create(AppModule);
-  await app.init();
-  const expressApp = app.getHttpAdapter().getInstance();
-  return createServer(expressApp);
+export default async function handler(req, res) {
+  const server = await bootstrap();
+  return server(req, res);
 }
-
-module.exports.handler = async (event, context) => {
-  if (!cachedServer) {
-    cachedServer = await bootstrapServer();
-  }
-  return proxy(cachedServer, event, context, 'PROMISE').promise;
-};
