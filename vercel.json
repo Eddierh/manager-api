@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "memory": 512
+  "outputDirectory": "dist",
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/index.js"
+      "dest": "api/index.ts"
     }
   ]
 }
