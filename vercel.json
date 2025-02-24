@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "outputDirectory": "dist",
   "functions": {
-    "api/index.js": {
+    "api/**/*.js": {
       "maxDuration": 60,
       "memory": 512
     }
