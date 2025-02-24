@@ -21,8 +21,9 @@
     "vercel-build": "npm run build"
   },
   "engines": {
-  "node": "18.x"
-  },
+  "node": "20.x"
+}
+,
 
   "dependencies": {
     "@nestjs/common": "^11.0.1",
