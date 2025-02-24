@@ -1,4 +1,4 @@
-import { bootstrap } from 'dist/src/main';
+import { bootstrap } from '../dist/main';
 
 let server: any;
 
