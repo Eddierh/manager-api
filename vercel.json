@@ -1,8 +1,9 @@
 {
   "version": 2,
+  "outputDirectory": "dist",
   "functions": {
-    "api/index.ts": {
-      "runtime": "vercel-nodejs@18.0.0",
+    "api/index.js": {
+      "runtime": "nodejs18.x",
       "maxDuration": 60,
       "memory": 512
     }
@@ -10,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/index.ts"
+      "dest": "api/index.js"
     }
   ]
 }
