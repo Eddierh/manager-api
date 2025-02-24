@@ -1,13 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import serverlessExpress from '@vendia/serverless-express';
+import createServer from '@vendia/serverless-express'; // ✅ Importación corregida
 
 export async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api'); // Definir prefijo global
-  await app.init(); // Inicializar la aplicación
+  app.setGlobalPrefix('api');
+  await app.init();
 
-  // Obtener la instancia de Express para entornos serverless
   const expressApp = app.getHttpAdapter().getInstance();
-  return serverlessExpress({ app: expressApp });
+  return createServer(expressApp); // ✅ Usar createServer directamente
 }
