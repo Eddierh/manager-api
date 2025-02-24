@@ -12,6 +12,9 @@ import { WelcomeController } from './welcome.controller'; // ✅ Importar el nue
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
       synchronize: true, // ⚠️ Solo en desarrollo
+      ssl: {
+        rejectUnauthorized: false, // ✅ Necesario para conexiones seguras en plataformas como Supabase
+      },
     }),
     AuthModule,
   ],
