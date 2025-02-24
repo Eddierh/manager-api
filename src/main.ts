@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import createServer from '@vendia/serverless-express'; // ✅ Importación corregida
+import  createServer  from '@vendia/serverless-express'; // ✅ Importación correcta
 
 export async function bootstrap() {
   const app = await NestFactory.create(AppModule);
