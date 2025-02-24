@@ -6,7 +6,7 @@ module.exports = async function handler(event: any, context: any) {
   if (!server) {
     try {
       console.log('🔄 Inicializando el servidor...');
-      const { bootstrap } = require(path.resolve(__dirname, '../dist/main.js'));
+      const { bootstrap } = require(path.resolve(__dirname, '../dist/src/main.js'));
       server = await bootstrap();
       console.log('✅ Servidor inicializado correctamente.');
     } catch (error) {
