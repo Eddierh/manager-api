@@ -8,5 +8,5 @@ module.exports = async function handler(event, context, callback) {
     const { bootstrap } = require(path.resolve(__dirname, '../dist/src/main.js'));
     server = await bootstrap();
   }
-  return server(event, context, callback);
+  return server(event, context);
 };

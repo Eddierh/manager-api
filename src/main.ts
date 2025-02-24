@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as dotenv from 'dotenv';
+import serverlessExpress from '@vendia/serverless-express';
 
-dotenv.config();
-
-async function bootstrap() {
+export async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api');
-  await app.listen(process.env.PORT || 3000);
+  app.setGlobalPrefix('api'); // Definir prefijo global
+  await app.init(); // Inicializar la aplicación
+
+  // Obtener la instancia de Express para entornos serverless
+  const expressApp = app.getHttpAdapter().getInstance();
+  return serverlessExpress({ app: expressApp });
 }
-export { bootstrap };
-export default bootstrap;
