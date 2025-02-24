@@ -1,17 +1,22 @@
 const pathModule = require('path');
+const pathModule = require('path');
 
 // ✅ Definir server directamente en el objeto global sin el archivo adicional
 (global as any).server = (global as any).server || null;
 
-module.exports = async function handler(event, context, callback) {
-  if (!(global as any).server) {
-    // Importación corregida del handler
-    const bootstrapHandler = require(pathModule.resolve(__dirname, '../dist/src/main.js')).handler;
-    (global as any).server = await bootstrapHandler();
+module.exports = async function handler(event: any, context: any) {
+  if (!server) {
+    try {
+      const { bootstrap } = require(path.resolve(__dirname, '../dist/src/main.js')); // ✅ Ruta correcta hacia main.js
+      server = await bootstrap();
+    } catch (error) {
+      console.error('Error inicializando el servidor:', error);
+      throw new Error('Error al inicializar el servidor');
+    }
   }
 
-  if ((global as any).server) {
-    return (global as any).server(event, context, callback);
+  if (server) {
+    return server(event, context); // ✅ Invocación segura
   } else {
     throw new Error('Error al inicializar el servidor');
   }
