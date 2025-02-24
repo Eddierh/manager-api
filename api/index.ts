@@ -1,16 +1,22 @@
-// ✅ Evitar múltiples declaraciones de variables
 const path = require('path');
 
-let server: (event: any, context: any) => any = () => null;
+// ✅ Inicialización clara de la variable server
+let server: ((event: any, context: any) => Promise<any>) | null = null;
 
-module.exports = async function handler(event, context) {
+module.exports = async function handler(event: any, context: any) {
   if (!server) {
-    const { bootstrap } = require(path.resolve(__dirname, '../dist/src/main.js'));
-    server = await bootstrap();
+    try {
+      const { bootstrap } = require(path.resolve(__dirname, '../dist/src/main.js')); // ✅ Ruta correcta hacia main.js
+      server = await bootstrap();
+    } catch (error) {
+      console.error('Error inicializando el servidor:', error);
+      throw new Error('Error al inicializar el servidor');
+    }
   }
+
   if (server) {
-    return server(event, context);
+    return server(event, context); // ✅ Invocación segura
   } else {
-    throw new Error('Server is not initialized');
+    throw new Error('El servidor no está inicializado');
   }
 };
